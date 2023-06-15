@@ -21,10 +21,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-  if (arr.indexOf(value) === -1) {
-    return -1;
-  }
-  return arr.indexOf(value);
+  return arr.indexOf(value) === -1 ? -1 : arr.indexOf(value);
 }
 
 /**
@@ -369,10 +366,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-  if (arr.length === 0) {
-    return 0;
-  }
-  return arr.reduce((acc, el) => acc + el);
+  return arr.length === 0 ? 0 : arr.reduce((acc, el) => acc + el);
 }
 
 /**
@@ -487,8 +481,10 @@ function sortCitiesArray(/* arr */) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const newArr = new Array(n).fill(new Array(n).fill(0));
+  return newArr.map((elMain, indexMain) => elMain
+    .map((elMin, indexMin) => ((indexMain === indexMin) ? 1 : 0)));
 }
 
 /**
