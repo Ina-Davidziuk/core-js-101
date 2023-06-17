@@ -126,8 +126,10 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  if ((rect1.top + rect1.height) > rect2.top
+    && (rect1.left + rect1.width) > rect2.left) return true;
+  return false;
 }
 
 
@@ -335,8 +337,30 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const openBracket = ['(', '{', '[', '<'];
+  const bracketsPar = {
+    ')': '(',
+    '}': '{',
+    ']': '[',
+    '>': '<',
+  };
+  const stack = [];
+  const arr = str.split('');
+  if (arr.length % 2 !== 0) return false;
+  arr.map((el) => {
+    if (openBracket.includes(el)) {
+      stack.push(el);
+    } else if (stack.length === 0) {
+      return false;
+    }
+    const topElement = stack[stack.length - 1];
+    if (bracketsPar[el] === topElement && stack.length > 0) {
+      stack.pop();
+    }
+    return stack;
+  });
+  return stack.length === 0;
 }
 
 
@@ -435,8 +459,28 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  if (position[0][0]) {
+    if ((position[0][0] === position[0][1] && position[0][0] === position[0][2])
+    || (position[0][0] === position[1][0] && position[0][0] === position[2][0])
+    || (position[0][0] === position[1][1] && position[0][0] === position[2][2])) {
+      return position[0][0];
+    }
+  }
+  if (position[1][1]) {
+    if ((position[1][1] === position[0][2] && position[1][1] === position[2][0])
+    || (position[1][1] === position[1][0] && position[1][1] === position[1][2])
+    || (position[1][1] === position[0][1] && position[1][1] === position[2][1])) {
+      return position[1][1];
+    }
+  }
+  if (position[2][2]) {
+    if ((position[2][2] === position[2][1] && position[2][2] === position[2][0])
+    || (position[2][2] === position[1][2] && position[2][2] === position[0][2])) {
+      return position[2][2];
+    }
+  }
+  return undefined;
 }
 
 
